@@ -39,9 +39,14 @@ const changeColorPromise = (color,delay)=>{
     return new Promise((resolve,reject)=>{
 
         setTimeout(() => {
+            if(delay>1000){
+                 reject(`delay greater than 1 =  delay is ${delay}` );
+            }else{
+                document.body.style.backgroundColor = color;
+                resolve('background has changed');
+            }
             
-            document.body.style.backgroundColor = color;
-            resolve('background has changed');
+            
         }, delay);
 
 
@@ -50,17 +55,20 @@ const changeColorPromise = (color,delay)=>{
 
 
 async function rainbow(){
-    await changeColorPromise('red',1000)
-    await changeColorPromise('green',1000)
-    await changeColorPromise('yellow',1000)
-    await changeColorPromise('magenta',1000)
-    await changeColorPromise('lightgreen',1000)
-    await changeColorPromise('pink',1000)
 
+    try {
 
-
-
-
+        await changeColorPromise('red',2000)
+        await changeColorPromise('green',1000)
+        await changeColorPromise('yellow',1000)
+        await changeColorPromise('magenta',1000)
+        await changeColorPromise('lightgreen',1000)
+        await changeColorPromise('pink',1000)
+        
+    } catch (error) {
+        console.log(error + "!!")
+    }
+   
 }
 
 rainbow()
